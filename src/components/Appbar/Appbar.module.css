@@ -1,0 +1,12 @@
+.app-bar-container {
+    @apply flex items-center justify-between p-6 text-white bg-gray-800;
+    width: auto;
+}
+
+.app-bar-logo {
+    @apply text-4xl
+}
+
+.app-bar-theme-switch {
+    @apply p-2 rounded-md
+}
