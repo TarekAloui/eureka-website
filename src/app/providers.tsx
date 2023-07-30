@@ -16,7 +16,7 @@ const Providers: FC<ProvidersProps> = ({ children }: ProvidersProps) => {
 	if (!mounted) {
 		return <>{children}</>
 	}
-	return <ThemeProvider>{children}</ThemeProvider>
+	return <ThemeProvider attribute="class">{children}</ThemeProvider>
 }
 
 export default Providers

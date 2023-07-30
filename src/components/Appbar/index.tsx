@@ -1,12 +1,10 @@
 import React, { FC } from 'react'
-import styles from './Appbar.module.css'
 import ThemeSwitcher from '../ThemeSwitcher'
 
 const Appbar: FC = () => {
-	console.log(styles['app-bar-container'])
 	return (
-		<nav className={styles['app-bar-container']}>
-			<h1 className={styles['app-bar-logo']}>Title</h1>
+		<nav className="flex items-center justify-between bg-red-200 p-6 text-white dark:bg-gray-800">
+			<h1 className="text-4xl">Title</h1>
 			<ThemeSwitcher />
 		</nav>
 	)
