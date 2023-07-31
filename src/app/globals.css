@@ -3,10 +3,43 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground: #1d3557;
+  --bg-start: #f1faee;
+  --bg-end: #ffffff;
+  --primary: #e63946;
+  --secondary: #457b9d;
+  --t-primary: #1d3557;
+  --t-secondary: #457b9d;
+  --t-inverse: #f1faee;
+  --link: #a8dadc;
+  --link-hover: #e63946;
+  --error: #e63946;
+  --success: #a8dadc;
+  --warning: #457b9d;
+  --info: #a8dadc;
+  --accent-primary: #e63946;
+  --accent-secondary: #457b9d;
 }
+
+.dark {
+  --foreground: #f1faee;
+  --bg-start: #1d3557;
+  --bg-end: #1d3557;
+  --primary: #a8dadc;
+  --secondary: #f1faee;
+  --t-primary: #f1faee;
+  --t-secondary: #a8dadc;
+  --t-inverse: #1d3557;
+  --link: #f1faee;
+  --link-hover: #a8dadc;
+  --error: #e63946;
+  --success: #457b9d;
+  --warning: #e63946;
+  --info: #f1faee;
+  --accent-primary: #a8dadc;
+  --accent-secondary: #f1faee;
+}
+
 
 @media (prefers-color-scheme: dark) {
   :root {
