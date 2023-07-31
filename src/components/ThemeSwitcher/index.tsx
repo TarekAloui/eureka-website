@@ -46,7 +46,13 @@ export const DarkMoonIcon: FC = () => {
 	)
 }
 
-const ThemeSwitcher = () => {
+interface ThemeSwitcherProps {
+	className?: string
+}
+
+const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
+	className,
+}: ThemeSwitcherProps) => {
 	// States
 	const [mounted, setMounted] = useState(false)
 	const { theme, setTheme } = useTheme()
@@ -62,7 +68,7 @@ const ThemeSwitcher = () => {
 	}
 
 	return (
-		<div>
+		<div className={className}>
 			<button onClick={onChangeThemeToggle}>
 				{theme == 'light' ? <LightMoonIcon /> : <DarkMoonIcon />}
 			</button>
