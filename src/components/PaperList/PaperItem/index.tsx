@@ -6,40 +6,39 @@ interface PaperItemProps {
 }
 
 const PaperItem: FC<PaperItemProps> = ({ paper }) => (
-	<div className="mb-6 overflow-hidden rounded bg-bg-start p-6 shadow-lg">
+	<div className="relative mb-6 flex flex-col overflow-hidden rounded bg-bg-start p-6 shadow-lg">
+		<div className="absolute right-3 top-3 text-xs text-t-secondary">
+			Trendiness Score: {paper.trendiness_score}
+		</div>
+
 		<h2 className="mb-2 text-2xl font-bold text-primary">{paper.title}</h2>
 
-		<div className="mb-4">
+		<div className="mb-4 flex-grow text-lg text-secondary">
 			<p className="font-semibold text-primary">Abstract</p>
-			<p className="text-secondary">{paper.abstract}</p>
+			<p>{paper.abstract}</p>
 		</div>
 
-		<div className="mb-4">
-			<p className="font-semibold text-primary">Authors</p>
-			<ul>
-				{paper.authors.map((author, index) => (
-					<li key={index} className="mb-1 text-secondary">
-						{author.name} - {author.affiliation}
-					</li>
-				))}
-			</ul>
-		</div>
+		<div className="flex flex-wrap justify-between text-sm text-secondary">
+			<div className="mb-4 w-full md:w-1/2">
+				<p className="font-semibold text-primary">Authors</p>
+				<ul>
+					{paper.authors.map((author, index) => (
+						<li key={index} className="mb-1">
+							{author.name} - {author.affiliation}
+						</li>
+					))}
+				</ul>
+			</div>
 
-		<div className="mb-4">
-			<p className="font-semibold text-primary">Publication Date</p>
-			<p className="text-secondary">
-				{paper.pub_date.toLocaleDateString()}
-			</p>
-		</div>
+			<div className="mb-4 w-full md:w-1/4">
+				<p className="font-semibold text-primary">Publication Date</p>
+				<p>{paper.pub_date.toLocaleDateString()}</p>
+			</div>
 
-		<div className="mb-4">
-			<p className="font-semibold text-primary">Journal Reference</p>
-			<p className="text-secondary">{paper.journal_ref}</p>
-		</div>
-
-		<div className="mb-4">
-			<p className="font-semibold text-primary">Trendiness Score</p>
-			<p className="text-secondary">{paper.trendiness_score}</p>
+			<div className="mb-4 w-full md:w-1/4">
+				<p className="font-semibold text-primary">Journal Reference</p>
+				<p>{paper.journal_ref}</p>
+			</div>
 		</div>
 	</div>
 )
