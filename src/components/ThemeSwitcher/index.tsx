@@ -9,7 +9,7 @@ export const LightMoonIcon: FC = () => {
 	return (
 		<div>
 			<svg
-				className="h-6 w-6 text-gray-800 dark:text-white"
+				className="h-6 w-6 text-t-primary hover:text-link-hover"
 				aria-hidden="true"
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
@@ -32,9 +32,9 @@ export const DarkMoonIcon: FC = () => {
 		'M17.8 13.75a1 1 0 0 0-.859-.5A7.488 7.488 0 0 1 10.52 2a1 1 0 0 0 0-.969A1.035 1.035 0 0 0 9.687.5h-.113a9.5 9.5 0 1 0 8.222 14.247 1 1 0 0 0 .004-.997Z'
 
 	return (
-		<div>
+		<div className="text-white hover:text-link-hover">
 			<svg
-				className="h-6 w-6 text-gray-800 dark:text-white"
+				className="h-6 w-6"
 				aria-hidden="true"
 				xmlns="http://www.w3.org/2000/svg"
 				fill="currentColor"

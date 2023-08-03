@@ -1,22 +1,15 @@
 import React, { FC } from 'react'
 import ThemeSwitcher from '../ThemeSwitcher'
 import Image from 'next/image'
+import AppBarLogo from './AppBarLogo'
+import { BiUserCircle } from 'react-icons/bi'
 
 const Appbar: FC = () => {
 	return (
-		<nav className="border-gray-200 bg-primary">
+		<nav className="border-gray-200 bg-bg-start">
 			<div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
 				<a href="/" className="flex items-center">
-					<Image
-						src="https://flowbite.com/docs/images/logo.svg"
-						className="mr-3 h-8"
-						alt="Flowbite Logo"
-						width={48}
-						height={48}
-					/>
-					<span className="self-center whitespace-nowrap text-2xl font-semibold text-t-primary">
-						Eureka
-					</span>
+					<AppBarLogo />
 				</a>
 				<div className="flex flex-row items-center justify-between md:order-1">
 					<div
@@ -27,7 +20,7 @@ const Appbar: FC = () => {
 							<li>
 								<a
 									href="#"
-									className="block rounded bg-blue-700 py-2 pl-3 pr-4 text-white md:bg-transparent md:p-0 md:text-blue-700 md:dark:text-blue-500"
+									className="block rounded py-2 pl-3 pr-4 text-t-primary hover:text-link-hover md:bg-transparent md:p-0"
 									aria-current="page"
 								>
 									Home
@@ -36,7 +29,7 @@ const Appbar: FC = () => {
 							<li>
 								<a
 									href="#"
-									className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
+									className="block rounded py-2 pl-3 pr-4 text-t-primary hover:text-link-hover md:bg-transparent md:p-0"
 								>
 									Bookmarks
 								</a>
@@ -44,32 +37,40 @@ const Appbar: FC = () => {
 							<li>
 								<a
 									href="#"
-									className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
+									className="block rounded py-2 pl-3 pr-4 text-t-primary hover:text-link-hover md:bg-transparent md:p-0"
 								>
 									About
 								</a>
 							</li>
 						</ul>
 					</div>
-					<ThemeSwitcher className="end-0" />
+					<ThemeSwitcher className="end-0 block rounded py-2 pl-3 pr-4 text-t-primary md:bg-transparent md:p-0" />
 				</div>
 				<div className="flex items-center md:order-2">
 					<button
 						type="button"
-						className="mr-3 flex rounded-full bg-gray-800 text-sm focus:accent-secondary focus:ring-4 md:mr-0"
+						className="mr-3 flex h-8 w-8 rounded-full text-sm md:mr-0"
 						id="user-menu-button"
 						aria-expanded="false"
 						data-dropdown-toggle="user-dropdown"
 						data-dropdown-placement="bottom"
 					>
 						<span className="sr-only">Open user menu</span>
-						<Image
-							className="h-8 w-8 rounded-full"
-							src="/docs/images/people/profile-picture-3.jpg"
-							alt="user photo"
-							width={32}
-							height={32}
-						/>
+						<svg
+							className="align-self-center h-5 w-5 object-center hover:text-link-hover"
+							aria-hidden="true"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 17 14"
+						>
+							<path
+								stroke="currentColor"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M1 1h15M1 7h15M1 13h15"
+							/>
+						</svg>
 					</button>
 					<div
 						className="z-50 my-4 hidden list-none divide-y divide-gray-100 rounded-lg bg-white text-base shadow dark:divide-gray-600 dark:bg-gray-700"
