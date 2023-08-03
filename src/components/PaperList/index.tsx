@@ -1,25 +1,16 @@
-// components/PaperList/index.tsx
+import { Paper } from '@/lib/model/Paper'
+import PaperItem from './PaperItem'
 
-import { FunctionComponent } from 'react';
-import { Paper } from '../../lib/model/Paper';
-import dummyPapers from '../../lib/dummy/dummyPapers';
-import { PaperItem } from './PaperItem';
+interface PaperListProps {
+	papers: Paper[]
+}
 
-type PaperListProps = {
-  papers: Paper[];
-};
+const PaperList: React.FC<PaperListProps> = ({ papers }) => (
+	<div className="bg-bg-end p-6">
+		{papers.map((paper) => (
+			<PaperItem key={paper.id} paper={paper} />
+		))}
+	</div>
+)
 
-const PaperList: FunctionComponent<PaperListProps> = ({ papers }) => {
-  return (
-    <div>
-      {papers.map((paper) => (
-        <PaperItem key={paper.id}>
-          <h2>{paper.title}</h2>
-          <p>{paper.abstract}</p>
-        </PaperItem>
-      ))}
-    </div>
-  );
-};
-
-export default PaperList;
+export default PaperList
