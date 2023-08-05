@@ -1,20 +1,36 @@
 import { Paper } from '@/lib/model/Paper'
 import Link from 'next/link'
-import { FC } from 'react'
+import { FC, useCallback } from 'react'
 
 interface PaperItemProps {
 	paper: Paper
 }
 
-const PaperItem: FC<PaperItemProps> = ({ paper }) => {
+const PaperItem: FC<PaperItemProps> = ({ paper }: PaperItemProps) => {
+	const paperJSON = JSON.stringify(paper)
+	const searchParams = new URLSearchParams()!
+	const createQueryString = useCallback(
+		(name: string, value: string) => {
+			const params = new URLSearchParams(searchParams)
+			params.set(name, value)
+
+			return params.toString()
+		},
+		[searchParams],
+	)
+
 	return (
 		<div className="relative mb-6 flex flex-col overflow-hidden rounded bg-bg-start p-6 shadow-lg">
 			<div className="absolute right-3 top-3 text-xs text-t-secondary">
 				Trendiness Score: {paper.trendiness_score}
 			</div>
 
-			<Link href={`/papers/${encodeURIComponent(paper.id)}`}>
-				<h2 className="mb-2 text-2xl font-bold text-primary hover:text-link">
+			<Link
+				href={`/papers/${encodeURIComponent(
+					paper.id,
+				)}?${createQueryString('paperJSON', paperJSON)}`}
+			>
+				<h2 className="mb-2 text-2xl font-bold text-foreground hover:text-link">
 					{paper.title}
 				</h2>
 			</Link>

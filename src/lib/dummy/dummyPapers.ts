@@ -55,7 +55,9 @@ function generateDummyTweets(count: number): Tweet[] {
 }
 
 // Function to generate dummy data
-function generateDummyData(numPapers = 50): c {
+const generateDummyData = (
+	numPapers = 50,
+): [Paper[], { [key: string]: Paper }] => {
 	const data: Paper[] = []
 	const paperDict: { [key: string]: Paper } = {}
 	for (let i = 0; i < numPapers; i++) {
@@ -83,16 +85,10 @@ function generateDummyData(numPapers = 50): c {
 		data.push(paper)
 		paperDict[paper.id] = paper
 	}
+
+	// saving in local storage
 	return [data, paperDict]
 }
 
-// Generate the dummy data
-const [dummyData, dummyDataDict] = generateDummyData()
-
-const getPaperById = (id: String) => {
-	return dummyDataDict[id]
-}
-
 // Export both variables
-export { dummyData, dummyDataDict, getPaperById }
-export default dummyData
+export { generateDummyData }

@@ -27,11 +27,12 @@ module.exports = {
 				success: 'var(--success)',
 				warning: 'var(--warning)',
 				info: 'var(--info)',
+				accent: 'var(--accent-primary)',
 				'accent-primary': 'var(--accent-primary)',
 				'accent-secondary': 'var(--accent-secondary)',
 			},
 		},
 	},
-	plugins: [],
+	plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
 	darkMode: 'class',
 }
