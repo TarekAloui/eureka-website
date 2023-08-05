@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import Providers from './providers'
+import { Appbar } from '@/components'
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -15,7 +16,8 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<Providers>
-				<body className="flex h-screen flex-col bg-gradient-to-b from-bg-start bg-scroll bg-no-repeat">
+				<body className="flex h-screen flex-col bg-gradient-to-b from-bg-start bg-fixed bg-no-repeat">
+					<Appbar />
 					<div className="flex-1">{children}</div>
 				</body>
 			</Providers>

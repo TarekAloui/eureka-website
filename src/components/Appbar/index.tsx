@@ -19,7 +19,7 @@ const Appbar: FC = () => {
 						<ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-transparent p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0">
 							<li>
 								<a
-									href="#"
+									href="/"
 									className="block rounded py-2 pl-3 pr-4 text-t-primary hover:text-link-hover md:bg-transparent md:p-0"
 									aria-current="page"
 								>
@@ -28,7 +28,7 @@ const Appbar: FC = () => {
 							</li>
 							<li>
 								<a
-									href="#"
+									href="/bookmarks"
 									className="block rounded py-2 pl-3 pr-4 text-t-primary hover:text-link-hover md:bg-transparent md:p-0"
 								>
 									Bookmarks
@@ -36,7 +36,7 @@ const Appbar: FC = () => {
 							</li>
 							<li>
 								<a
-									href="#"
+									href="/about"
 									className="block rounded py-2 pl-3 pr-4 text-t-primary hover:text-link-hover md:bg-transparent md:p-0"
 								>
 									About
@@ -78,10 +78,10 @@ const Appbar: FC = () => {
 					>
 						<div className="px-4 py-3">
 							<span className="block text-sm text-gray-900 dark:text-white">
-								Bonnie Green
+								UserName
 							</span>
 							<span className="block truncate  text-sm text-gray-500 dark:text-gray-400">
-								name@flowbite.com
+								name@eureka.com
 							</span>
 						</div>
 						<ul className="py-2" aria-labelledby="user-menu-button">
@@ -103,30 +103,6 @@ const Appbar: FC = () => {
 							</li>
 						</ul>
 					</div>
-					<button
-						data-collapse-toggle="navbar-user"
-						type="button"
-						className="inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
-						aria-controls="navbar-user"
-						aria-expanded="false"
-					>
-						<span className="sr-only">Open main menu</span>
-						<svg
-							className="h-5 w-5"
-							aria-hidden="true"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 17 14"
-						>
-							<path
-								stroke="currentColor"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M1 1h15M1 7h15M1 13h15"
-							/>
-						</svg>
-					</button>
 				</div>
 			</div>
 		</nav>

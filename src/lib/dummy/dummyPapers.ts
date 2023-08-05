@@ -55,13 +55,14 @@ function generateDummyTweets(count: number): Tweet[] {
 }
 
 // Function to generate dummy data
-function generateDummyData(numPapers = 50): Paper[] {
+function generateDummyData(numPapers = 50): c {
 	const data: Paper[] = []
+	const paperDict: { [key: string]: Paper } = {}
 	for (let i = 0; i < numPapers; i++) {
 		const paperAuthors = randomSampleAuthors(
 			faker.datatype.number({ min: 1, max: 5 }),
 		)
-		data.push({
+		const paper = {
 			id: faker.datatype.uuid(),
 			title: faker.lorem.words(6),
 			authors: paperAuthors,
@@ -78,11 +79,20 @@ function generateDummyData(numPapers = 50): Paper[] {
 			journal_ref: 'Journal of Machine Learning Research',
 			trendiness_score: faker.datatype.number(100),
 			relatedTweets: generateDummyTweets(5),
-		})
+		}
+		data.push(paper)
+		paperDict[paper.id] = paper
 	}
-	return data
+	return [data, paperDict]
 }
 
 // Generate the dummy data
-const dummyData = generateDummyData()
+const [dummyData, dummyDataDict] = generateDummyData()
+
+const getPaperById = (id: String) => {
+	return dummyDataDict[id]
+}
+
+// Export both variables
+export { dummyData, dummyDataDict, getPaperById }
 export default dummyData
