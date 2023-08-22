@@ -1,8 +1,6 @@
 import React, { FC } from 'react'
 import ThemeSwitcher from '../ThemeSwitcher'
-import Image from 'next/image'
 import AppBarLogo from './AppBarLogo'
-import { BiUserCircle } from 'react-icons/bi'
 
 const Appbar: FC = () => {
 	return (
