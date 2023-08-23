@@ -1,0 +1,16 @@
+fragment TweetInfo on Tweet {
+	url
+	user_name
+	retweets
+	likes
+	text
+	date
+}
+
+query GetRelatedTweets($paperId: ID!) {
+	paper(id: $paperId) {
+		relatedTweets {
+			...TweetInfo
+		}
+	}
+}

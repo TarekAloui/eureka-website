@@ -1,0 +1,22 @@
+fragment AuthorInfo on Author {
+	name
+	affiliation
+}
+
+query GetPapers {
+	papers {
+		id
+		title
+		authors {
+			...AuthorInfo
+		}
+		abstract
+		pub_date
+		updated_date
+		categories
+		links
+		comment
+		journal_ref
+		trendiness_score
+	}
+}
