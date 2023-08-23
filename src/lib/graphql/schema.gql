@@ -36,6 +36,25 @@ type Paper {
 	relatedTweets: [Tweet]
 }
 
+# Input Types
+
+input AuthorInput {
+	name: String!
+	affiliation: String
+}
+
+input TweetInput {
+	id: ID!
+	text: String!
+}
+
+input PaperInput {
+	title: String!
+	abstract: String
+	authors: [AuthorInput]
+	relatedTweets: [TweetInput]
+}
+
 # Queries
 
 type Query {
@@ -53,31 +72,10 @@ type Mutation {
 	createAuthor(name: String!, affiliation: String): Author!
 	updateAuthor(id: ID!, name: String, affiliation: String): Author
 	deleteAuthor(id: ID!): Boolean!
-	createPaper(
-		title: String!
-		abstract: String
-		authors: [Author]
-		relatedTweets: [Tweet]
-	): Paper!
-	updatePaper(
-		id: ID!
-		title: String
-		abstract: String
-		authors: [Author]
-		relatedTweets: [Tweet]
-	): Paper
+	createPaper(input: PaperInput!): Paper!
+	updatePaper(id: ID!, input: PaperInput): Paper
 	deletePaper(id: ID!): Boolean!
-	createTweet(
-		id: ID!
-		text: String!
-		author: Author
-		relatedPaper: Paper
-	): Tweet!
-	updateTweet(
-		id: ID!
-		text: String
-		author: Author
-		relatedPaper: Paper
-	): Tweet
+	createTweet(input: TweetInput!): Tweet!
+	updateTweet(id: ID!, input: TweetInput): Tweet
 	deleteTweet(id: ID!): Boolean!
 }
