@@ -1,0 +1,4 @@
+{
+    "schema": "src/lib/graphql/schema.gql",
+    "documents": "src/components/**/*.gql"
+}

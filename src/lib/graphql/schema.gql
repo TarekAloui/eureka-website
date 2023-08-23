@@ -1,0 +1,83 @@
+# Types
+
+type Author {
+	id: ID!
+	name: String!
+	affiliation: String
+	hIndex: Int!
+	i10Index: Int!
+	citations: Int!
+	interests: String
+	profileUrl: String
+}
+
+type Tweet {
+	id: ID!
+	url: String!
+	user_name: String!
+	retweets: Int!
+	likes: Int!
+	text: String!
+	date: String!
+}
+
+type Paper {
+	id: ID!
+	title: String!
+	authors: [Author]
+	abstract: String
+	pub_date: String!
+	updated_date: String!
+	categories: String
+	links: String
+	comment: String
+	journal_ref: String
+	trendiness_score: Float!
+	relatedTweets: [Tweet]
+}
+
+# Queries
+
+type Query {
+	authors: [Author]
+	papers: [Paper]
+	tweets: [Tweet]
+	paper(id: ID!): Paper
+	tweet(id: ID!): Tweet
+	author(id: ID!): Author
+}
+
+# Mutations
+
+type Mutation {
+	createAuthor(name: String!, affiliation: String): Author!
+	updateAuthor(id: ID!, name: String, affiliation: String): Author
+	deleteAuthor(id: ID!): Boolean!
+	createPaper(
+		title: String!
+		abstract: String
+		authors: [Author]
+		relatedTweets: [Tweet]
+	): Paper!
+	updatePaper(
+		id: ID!
+		title: String
+		abstract: String
+		authors: [Author]
+		relatedTweets: [Tweet]
+	): Paper
+	deletePaper(id: ID!): Boolean!
+	createTweet(
+		id: ID!
+		text: String!
+		author: Author
+		relatedPaper: Paper
+	): Tweet!
+	updateTweet(
+		id: ID!
+		text: String
+		author: Author
+		relatedPaper: Paper
+	): Tweet
+	deleteTweet(id: ID!): Boolean!
+}
