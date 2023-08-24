@@ -1,4 +1,4 @@
-import { Paper } from '@/lib/model/Paper'
+import { Paper } from '@/lib/graphql/documents/graphql'
 import Link from 'next/link'
 import { FC, useCallback } from 'react'
 
@@ -44,11 +44,12 @@ const PaperItem: FC<PaperItemProps> = ({ paper }: PaperItemProps) => {
 				<div className="mb-4 w-full md:w-1/2">
 					<p className="font-semibold text-primary">Authors</p>
 					<ul>
-						{paper.authors.map((author, index) => (
-							<li key={index} className="mb-1">
-								{author.name} - {author.affiliation}
-							</li>
-						))}
+						{paper.authors &&
+							paper.authors.map((author, index) => (
+								<li key={index} className="mb-1">
+									{author!.name} - {author!.affiliation}
+								</li>
+							))}
 					</ul>
 				</div>
 
@@ -56,7 +57,7 @@ const PaperItem: FC<PaperItemProps> = ({ paper }: PaperItemProps) => {
 					<p className="font-semibold text-primary">
 						Publication Date
 					</p>
-					<p>{paper.pub_date.toLocaleDateString()}</p>
+					<p>{paper.pub_date}</p>
 				</div>
 
 				<div className="mb-4 w-full md:w-1/4">
