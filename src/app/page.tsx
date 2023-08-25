@@ -1,6 +1,6 @@
 import PaperList from '@/components/PaperList'
 
-export default function Home() {
+export default async function Home() {
 	return (
 		<main className="overflow-hidden">
 			<PaperList />

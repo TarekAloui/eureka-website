@@ -57,14 +57,14 @@ const PaperItem: FC<PaperItemProps> = ({ paper }: PaperItemProps) => {
 					<p className="font-semibold text-primary">
 						Publication Date
 					</p>
-					<p>{paper.pub_date}</p>
+					<p>{paper.pubDate}</p>
 				</div>
 
 				<div className="mb-4 w-full md:w-1/4">
 					<p className="font-semibold text-primary">
 						Journal Reference
 					</p>
-					<p>{paper.journal_ref}</p>
+					<p>{paper.journalRef}</p>
 				</div>
 			</div>
 		</div>

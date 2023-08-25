@@ -1,4 +1,4 @@
-fragment AuthorInfo on Author {
+fragment AuthorInfo on AuthorType {
 	name
 	affiliation
 }
@@ -11,12 +11,12 @@ query GetPapers {
 			...AuthorInfo
 		}
 		abstract
-		pub_date
-		updated_date
+		pubDate
+		updatedDate
 		categories
 		links
 		comment
-		journal_ref
-		trendiness_score
+		journalRef
+		trendinessScore
 	}
 }

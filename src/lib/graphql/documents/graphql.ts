@@ -14,10 +14,21 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  /**
+   * The `DateTime` scalar type represents a DateTime
+   * value as specified by
+   * [iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+   */
+  DateTime: { input: any; output: any; }
+  /**
+   * Leverages the internal Python implementation of UUID (uuid.UUID) to provide native UUID objects
+   * in fields, resolvers and input.
+   */
+  UUID: { input: any; output: any; }
 };
 
-export type Author = {
-  __typename?: 'Author';
+export type AuthorType = {
+  __typename?: 'AuthorType';
   affiliation?: Maybe<Scalars['String']['output']>;
   citations: Scalars['Int']['output'];
   hIndex: Scalars['Int']['output'];
@@ -25,41 +36,40 @@ export type Author = {
   id: Scalars['ID']['output'];
   interests?: Maybe<Scalars['String']['output']>;
   name: Scalars['String']['output'];
-  profileUrl?: Maybe<Scalars['String']['output']>;
+  paperSet: Array<PaperType>;
+  profileUrl: Scalars['String']['output'];
 };
 
-export type AuthorInput = {
+export type CreateAuthor = {
+  __typename?: 'CreateAuthor';
+  author?: Maybe<AuthorType>;
+};
+
+export type CreateAuthorInput = {
   affiliation?: InputMaybe<Scalars['String']['input']>;
-  name: Scalars['String']['input'];
+  citations?: InputMaybe<Scalars['Int']['input']>;
+  hIndex?: InputMaybe<Scalars['Int']['input']>;
+  i10Index?: InputMaybe<Scalars['Int']['input']>;
+  interests?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  profileUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DeleteAuthor = {
+  __typename?: 'DeleteAuthor';
+  success?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createAuthor: Author;
-  createPaper: Paper;
-  createTweet: Tweet;
-  deleteAuthor: Scalars['Boolean']['output'];
-  deletePaper: Scalars['Boolean']['output'];
-  deleteTweet: Scalars['Boolean']['output'];
-  updateAuthor?: Maybe<Author>;
-  updatePaper?: Maybe<Paper>;
-  updateTweet?: Maybe<Tweet>;
+  createAuthor?: Maybe<CreateAuthor>;
+  deleteAuthor?: Maybe<DeleteAuthor>;
+  updateAuthor?: Maybe<UpdateAuthor>;
 };
 
 
 export type MutationCreateAuthorArgs = {
-  affiliation?: InputMaybe<Scalars['String']['input']>;
-  name: Scalars['String']['input'];
-};
-
-
-export type MutationCreatePaperArgs = {
-  input: PaperInput;
-};
-
-
-export type MutationCreateTweetArgs = {
-  input: TweetInput;
+  authorInput: CreateAuthorInput;
 };
 
 
@@ -68,121 +78,92 @@ export type MutationDeleteAuthorArgs = {
 };
 
 
-export type MutationDeletePaperArgs = {
-  id: Scalars['ID']['input'];
-};
-
-
-export type MutationDeleteTweetArgs = {
-  id: Scalars['ID']['input'];
-};
-
-
 export type MutationUpdateAuthorArgs = {
-  affiliation?: InputMaybe<Scalars['String']['input']>;
+  authorInput: CreateAuthorInput;
   id: Scalars['ID']['input'];
-  name?: InputMaybe<Scalars['String']['input']>;
 };
 
-
-export type MutationUpdatePaperArgs = {
-  id: Scalars['ID']['input'];
-  input?: InputMaybe<PaperInput>;
-};
-
-
-export type MutationUpdateTweetArgs = {
-  id: Scalars['ID']['input'];
-  input?: InputMaybe<TweetInput>;
-};
-
-export type Paper = {
-  __typename?: 'Paper';
-  abstract?: Maybe<Scalars['String']['output']>;
-  authors?: Maybe<Array<Maybe<Author>>>;
+export type PaperType = {
+  __typename?: 'PaperType';
+  abstract: Scalars['String']['output'];
+  authors?: Maybe<Array<Maybe<AuthorType>>>;
   categories?: Maybe<Scalars['String']['output']>;
   comment?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
-  journal_ref?: Maybe<Scalars['String']['output']>;
+  id: Scalars['UUID']['output'];
+  journalRef?: Maybe<Scalars['String']['output']>;
   links?: Maybe<Scalars['String']['output']>;
-  pub_date: Scalars['String']['output'];
-  relatedTweets?: Maybe<Array<Maybe<Tweet>>>;
+  pubDate: Scalars['DateTime']['output'];
+  relatedTweets?: Maybe<Array<Maybe<TweetType>>>;
   title: Scalars['String']['output'];
-  trendiness_score: Scalars['Float']['output'];
-  updated_date: Scalars['String']['output'];
-};
-
-export type PaperInput = {
-  abstract?: InputMaybe<Scalars['String']['input']>;
-  authors?: InputMaybe<Array<InputMaybe<AuthorInput>>>;
-  relatedTweets?: InputMaybe<Array<InputMaybe<TweetInput>>>;
-  title: Scalars['String']['input'];
+  trendinessScore: Scalars['Float']['output'];
+  updatedDate: Scalars['DateTime']['output'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  author?: Maybe<Author>;
-  authors?: Maybe<Array<Maybe<Author>>>;
-  paper?: Maybe<Paper>;
-  papers?: Maybe<Array<Maybe<Paper>>>;
-  tweet?: Maybe<Tweet>;
-  tweets?: Maybe<Array<Maybe<Tweet>>>;
+  author?: Maybe<AuthorType>;
+  authors?: Maybe<Array<Maybe<AuthorType>>>;
+  paper?: Maybe<PaperType>;
+  papers?: Maybe<Array<Maybe<PaperType>>>;
+  tweet?: Maybe<TweetType>;
+  tweets?: Maybe<Array<Maybe<TweetType>>>;
 };
 
 
 export type QueryAuthorArgs = {
-  id: Scalars['ID']['input'];
+  id: Scalars['UUID']['input'];
 };
 
 
 export type QueryPaperArgs = {
-  id: Scalars['ID']['input'];
+  id: Scalars['UUID']['input'];
 };
 
 
 export type QueryTweetArgs = {
-  id: Scalars['ID']['input'];
+  id: Scalars['UUID']['input'];
 };
 
-export type Tweet = {
-  __typename?: 'Tweet';
-  date: Scalars['String']['output'];
+export type TweetType = {
+  __typename?: 'TweetType';
+  date: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
   likes: Scalars['Int']['output'];
+  paperSet: Array<PaperType>;
   retweets: Scalars['Int']['output'];
   text: Scalars['String']['output'];
   url: Scalars['String']['output'];
-  user_name: Scalars['String']['output'];
+  userName: Scalars['String']['output'];
 };
 
-export type TweetInput = {
-  id: Scalars['ID']['input'];
-  text: Scalars['String']['input'];
+export type UpdateAuthor = {
+  __typename?: 'UpdateAuthor';
+  author?: Maybe<AuthorType>;
 };
 
-export type AuthorInfoFragment = { __typename?: 'Author', name: string, affiliation?: string | null } & { ' $fragmentName'?: 'AuthorInfoFragment' };
+export type AuthorInfoFragment = { __typename?: 'AuthorType', name: string, affiliation?: string | null } & { ' $fragmentName'?: 'AuthorInfoFragment' };
 
 export type GetPapersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPapersQuery = { __typename?: 'Query', papers?: Array<{ __typename?: 'Paper', id: string, title: string, abstract?: string | null, pub_date: string, updated_date: string, categories?: string | null, links?: string | null, comment?: string | null, journal_ref?: string | null, trendiness_score: number, authors?: Array<(
-      { __typename?: 'Author' }
+export type GetPapersQuery = { __typename?: 'Query', papers?: Array<{ __typename?: 'PaperType', id: any, title: string, abstract: string, pubDate: any, updatedDate: any, categories?: string | null, links?: string | null, comment?: string | null, journalRef?: string | null, trendinessScore: number, authors?: Array<(
+      { __typename?: 'AuthorType' }
       & { ' $fragmentRefs'?: { 'AuthorInfoFragment': AuthorInfoFragment } }
     ) | null> | null } | null> | null };
 
-export type TweetInfoFragment = { __typename?: 'Tweet', url: string, user_name: string, retweets: number, likes: number, text: string, date: string } & { ' $fragmentName'?: 'TweetInfoFragment' };
+export type TweetInfoFragment = { __typename?: 'TweetType', url: string, userName: string, retweets: number, likes: number, text: string, date: any } & { ' $fragmentName'?: 'TweetInfoFragment' };
 
 export type GetRelatedTweetsQueryVariables = Exact<{
-  paperId: Scalars['ID']['input'];
+  paperId: Scalars['UUID']['input'];
 }>;
 
 
-export type GetRelatedTweetsQuery = { __typename?: 'Query', paper?: { __typename?: 'Paper', relatedTweets?: Array<(
-      { __typename?: 'Tweet' }
+export type GetRelatedTweetsQuery = { __typename?: 'Query', paper?: { __typename?: 'PaperType', relatedTweets?: Array<(
+      { __typename?: 'TweetType' }
       & { ' $fragmentRefs'?: { 'TweetInfoFragment': TweetInfoFragment } }
     ) | null> | null } | null };
 
-export const AuthorInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AuthorInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Author"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"affiliation"}}]}}]} as unknown as DocumentNode<AuthorInfoFragment, unknown>;
-export const TweetInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TweetInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Tweet"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"user_name"}},{"kind":"Field","name":{"kind":"Name","value":"retweets"}},{"kind":"Field","name":{"kind":"Name","value":"likes"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"date"}}]}}]} as unknown as DocumentNode<TweetInfoFragment, unknown>;
-export const GetPapersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPapers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"papers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AuthorInfo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"abstract"}},{"kind":"Field","name":{"kind":"Name","value":"pub_date"}},{"kind":"Field","name":{"kind":"Name","value":"updated_date"}},{"kind":"Field","name":{"kind":"Name","value":"categories"}},{"kind":"Field","name":{"kind":"Name","value":"links"}},{"kind":"Field","name":{"kind":"Name","value":"comment"}},{"kind":"Field","name":{"kind":"Name","value":"journal_ref"}},{"kind":"Field","name":{"kind":"Name","value":"trendiness_score"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AuthorInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Author"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"affiliation"}}]}}]} as unknown as DocumentNode<GetPapersQuery, GetPapersQueryVariables>;
-export const GetRelatedTweetsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetRelatedTweets"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"paperId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"paper"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"paperId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"relatedTweets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"TweetInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TweetInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Tweet"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"user_name"}},{"kind":"Field","name":{"kind":"Name","value":"retweets"}},{"kind":"Field","name":{"kind":"Name","value":"likes"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"date"}}]}}]} as unknown as DocumentNode<GetRelatedTweetsQuery, GetRelatedTweetsQueryVariables>;
+export const AuthorInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AuthorInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AuthorType"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"affiliation"}}]}}]} as unknown as DocumentNode<AuthorInfoFragment, unknown>;
+export const TweetInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TweetInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TweetType"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"userName"}},{"kind":"Field","name":{"kind":"Name","value":"retweets"}},{"kind":"Field","name":{"kind":"Name","value":"likes"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"date"}}]}}]} as unknown as DocumentNode<TweetInfoFragment, unknown>;
+export const GetPapersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPapers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"papers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AuthorInfo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"abstract"}},{"kind":"Field","name":{"kind":"Name","value":"pubDate"}},{"kind":"Field","name":{"kind":"Name","value":"updatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"categories"}},{"kind":"Field","name":{"kind":"Name","value":"links"}},{"kind":"Field","name":{"kind":"Name","value":"comment"}},{"kind":"Field","name":{"kind":"Name","value":"journalRef"}},{"kind":"Field","name":{"kind":"Name","value":"trendinessScore"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AuthorInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AuthorType"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"affiliation"}}]}}]} as unknown as DocumentNode<GetPapersQuery, GetPapersQueryVariables>;
+export const GetRelatedTweetsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetRelatedTweets"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"paperId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"paper"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"paperId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"relatedTweets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"TweetInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TweetInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TweetType"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"userName"}},{"kind":"Field","name":{"kind":"Name","value":"retweets"}},{"kind":"Field","name":{"kind":"Name","value":"likes"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"date"}}]}}]} as unknown as DocumentNode<GetRelatedTweetsQuery, GetRelatedTweetsQueryVariables>;

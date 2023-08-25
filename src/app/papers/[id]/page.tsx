@@ -1,4 +1,3 @@
-'use client'
 import PaperDetails from '@/components/PaperDetails'
 import { Paper } from '@/lib/model/Paper'
 import { FC } from 'react'

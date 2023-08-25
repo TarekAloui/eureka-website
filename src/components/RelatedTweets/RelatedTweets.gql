@@ -1,13 +1,13 @@
-fragment TweetInfo on Tweet {
+fragment TweetInfo on TweetType {
 	url
-	user_name
+	userName
 	retweets
 	likes
 	text
 	date
 }
 
-query GetRelatedTweets($paperId: ID!) {
+query GetRelatedTweets($paperId: UUID!) {
 	paper(id: $paperId) {
 		relatedTweets {
 			...TweetInfo
