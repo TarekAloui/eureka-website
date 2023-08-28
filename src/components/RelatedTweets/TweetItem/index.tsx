@@ -1,13 +1,13 @@
-import { Tweet } from '@/lib/model/Tweet'
+import { TweetInfoFragment, TweetType } from '@/lib/graphql/documents/graphql'
 
 interface TweetItemProps {
-	tweet: Tweet
+	tweet: TweetInfoFragment
 }
 
 const TweetItem: React.FC<TweetItemProps> = ({ tweet }) => (
 	<div className="m-2 rounded border border-t-secondary bg-bg-start p-4">
 		<a href={tweet.url} className="font-bold text-primary">
-			{tweet.user_name}
+			{tweet.userName}
 		</a>
 		<p className="text-secondary">{tweet.text}</p>
 		<p className="text-xs text-secondary">

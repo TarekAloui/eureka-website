@@ -1,9 +1,9 @@
-import { Paper } from '@/lib/graphql/documents/graphql'
+import { PaperType } from '@/lib/graphql/documents/graphql'
 import Link from 'next/link'
 import { FC, useCallback } from 'react'
 
 interface PaperItemProps {
-	paper: Paper
+	paper: PaperType
 }
 
 const PaperItem: FC<PaperItemProps> = ({ paper }: PaperItemProps) => {
@@ -22,7 +22,7 @@ const PaperItem: FC<PaperItemProps> = ({ paper }: PaperItemProps) => {
 	return (
 		<div className="relative mb-6 flex flex-col overflow-hidden rounded bg-bg-start p-6 shadow-lg">
 			<div className="absolute right-3 top-3 text-xs text-t-secondary">
-				Trendiness Score: {paper.trendiness_score}
+				Trendiness Score: {paper.trendinessScore}
 			</div>
 
 			<Link

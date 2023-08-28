@@ -1,18 +1,17 @@
-import { Paper } from '@/lib/model/Paper'
 import PaperItem from './PaperItem'
 import { FC } from 'react'
 import { getClient } from '@/lib/apollo/client'
-import { GetPapersDocument } from '@/lib/graphql/documents/graphql'
+import { GetPapersDocument, PaperType } from '@/lib/graphql/documents/graphql'
 import PaperDetailsPage from '@/app/papers/[id]/page'
 
 const PaperList: FC = async () => {
 	console.log('PaperList')
 	try {
-		const { papers } = (
+		const papers = (
 			await getClient().query({
 				query: GetPapersDocument,
 			})
-		).data
+		).data.papers as PaperType[]
 		return (
 			<div className="container mx-auto w-2/3 place-content-center p-6">
 				{papers &&

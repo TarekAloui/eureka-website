@@ -1,4 +1,5 @@
 import PaperDetails from '@/components/PaperDetails'
+import { PaperType } from '@/lib/graphql/documents/graphql'
 import { Paper } from '@/lib/model/Paper'
 import { FC } from 'react'
 
@@ -18,7 +19,7 @@ const PaperDetailsPage: FC<PaperDetailsPageProps> = ({
 	const { paperJSON } = searchParams
 
 	// unpack the paper object from the query string
-	const paper: Paper = JSON.parse(paperJSON)
+	const paper: PaperType = JSON.parse(paperJSON)
 
 	return (
 		<div className="container mx-auto h-full overflow-hidden">
